@@ -15,7 +15,7 @@ struct SplashScreen: View {
             Text("Your thoughts, your story")
                 .font(.system(size: 18, weight: .light))
         }
-//        .preferredColorScheme(.dark)
+//   .preferredColorScheme(.dark)
     }
 }
 

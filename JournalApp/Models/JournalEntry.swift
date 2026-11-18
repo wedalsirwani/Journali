@@ -1,3 +1,4 @@
+//
 import Foundation
 struct JournalEntry: Identifiable {
     let id = UUID()

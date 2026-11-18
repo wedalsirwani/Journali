@@ -26,6 +26,8 @@ struct MyApp: App {
                     showSplash = false
                 }
             }
+            .preferredColorScheme(.dark)
+
         }
     }
 }
