@@ -32,9 +32,10 @@ class JournalViewModel: ObservableObject {
     // MARK: - Filter and Sort
 
     var filteredEntries: [JournalEntry] {
+
         var result = entries
 
-        // Search journals
+        // Search journals by title or content
         if !searchText.isEmpty {
             result = result.filter {
                 $0.title.localizedCaseInsensitiveContains(searchText) ||
@@ -42,12 +43,18 @@ class JournalViewModel: ObservableObject {
             }
         }
 
-        // Show only bookmarked journals
+        // Sort bookmarked journals first without hiding other entries
         if sortOption == .bookmark {
-            result = result.filter { $0.isBookmarked }
+            result.sort {
+                if $0.isBookmarked != $1.isBookmarked {
+                    return $0.isBookmarked
+                }
+
+                return $0.date > $1.date
+            }
         }
 
-        // Sort by date when selected
+        // Sort journals by date when selected
         if sortOption == .date {
             result.sort { $0.date > $1.date }
         }
@@ -57,13 +64,16 @@ class JournalViewModel: ObservableObject {
 
     // MARK: - Sort Actions
 
-    func showBookmarked() {
+    // Sort bookmarked journals first
+    func sortByBookmark() {
         sortOption = .bookmark
     }
 
+    // Sort journals by entry date
     func sortByDate() {
         sortOption = .date
     }
+
 
     // MARK: - Date Formatting
 
@@ -152,3 +162,4 @@ class JournalViewModel: ObservableObject {
         return true
     }
 }
+    

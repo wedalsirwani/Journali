@@ -24,28 +24,31 @@ struct MainPage: View {
                     HStack(spacing: 20) {
 
                         // Sort and Filter Menu
+
+                        // Sort Menu
                         Menu {
+
+                            // Sort bookmarked journals first
                             Button {
-                                viewModel.showBookmarked()
+                                viewModel.sortByBookmark()
                             } label: {
-                                Text("Show Bookmarked")
+                                Text("Sort by Bookmark")
                             }
 
                             Divider()
 
+                            // Sort journals by entry date
                             Button {
                                 viewModel.sortByDate()
                             } label: {
                                 Text("Sort by Entry Date")
                             }
+
                         } label: {
                             Image(systemName: "line.3.horizontal.decrease")
                                 .font(.title3)
                                 .foregroundStyle(.white)
                         }
-//                        .preferredColorScheme(.dark)
-
-                        // Add Button
                         Button {
                             viewModel.resetDraft()
                             showAddJournal = true
@@ -54,6 +57,7 @@ struct MainPage: View {
                                 .font(.title2)
                                 .foregroundStyle(.white)
                         }
+
                     }
                     .padding(.horizontal, 18)
                     .frame(width: 104, height: 48)
